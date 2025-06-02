@@ -26,9 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <body className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <body className="min-h-screen bg-white dark:bg-gray-900">
         <Navigation />
-        <main className="pt-16">{children}</main>
+        <main className="w-full">{children}</main>
         <Footer />
       </body>
     </html>

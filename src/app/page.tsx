@@ -7,13 +7,23 @@ import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-full">
       <Hero />
-      <Skills />
-      <Experience />
-      <Education />
-      <Projects />
-      <Contact />
+      <div id="skills">
+        <Skills />
+      </div>
+      <div id="experience">
+        <Experience />
+      </div>
+      <div id="education">
+        <Education />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
     </div>
   );
 }
