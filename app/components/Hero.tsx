@@ -70,7 +70,7 @@ const Hero = () => {
             </a>
 
             <a
-              href="/cv.pdf"
+              href="/MYportfolio/cv.pdf"
               download
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg font-medium transition-colors"
             >
