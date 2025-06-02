@@ -40,7 +40,7 @@ const Hero = () => {
             className="max-w-3xl mx-auto mb-12"
           >
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-          Je suis un développeur full stack passionné, avec de l’expérience en Angular, Flutter et Spring Boot. Je développe des applications web et mobiles performantes et sécurisées, de la conception jusqu’au déploiement. Je maîtrise les bases de données comme PostgreSQL et MySQL, et j’utilise Spring Security pour la sécurité, Postman pour tester les API, Spring Batch pour les traitements batch, Selenium pour les tests, et Docker pour le déploiement. Mon travail est centré sur la qualité du code, la performance et une bonne expérience utilisateur.
+          Je suis un développeur full stack passionné, avec de l'expérience en Angular, Flutter et Spring Boot. Je développe des applications web et mobiles performantes et sécurisées, de la conception jusqu'au déploiement. Je maîtrise les bases de données comme PostgreSQL et MySQL, et j'utilise Spring Security pour la sécurité, Postman pour tester les API, Spring Batch pour les traitements batch, Selenium pour les tests, et Docker pour le déploiement. Mon travail est centré sur la qualité du code, la performance et une bonne expérience utilisateur.
           </p>
 
           </motion.div>
@@ -69,10 +69,14 @@ const Hero = () => {
               LinkedIn
             </a>
 
-            <button className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg font-medium transition-colors">
+            <a
+              href="/cv.pdf"
+              download
+              className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg font-medium transition-colors"
+            >
               <Download className="w-5 h-5 mr-2" />
               Télécharger CV
-            </button>
+            </a>
           </motion.div>
 
           <motion.div
