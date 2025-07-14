@@ -35,7 +35,7 @@ const Skills = () => {
   const languages = [
     { name: "Arabe", level: "Native", percentage: 100 },
     { name: "Français", level: "Courant", percentage: 90 },
-    { name: "Anglais", level: "Courant", percentage: 90 }
+    { name: "Anglais", level: "Intermédiaire", percentage: 50 }
   ];
 
   const interests = [
