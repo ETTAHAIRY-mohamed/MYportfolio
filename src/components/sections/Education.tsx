@@ -9,7 +9,7 @@ const Education = () => {
   {
     degree: "Master Systèmes Intelligents et Mobiles",
     institution: "Université Sidi Mohammed Ben Abdellah",
-    location: "Khouribga, Maroc",
+    location: "Taza, Maroc",
     period: "2023 - 2025",
     status: "Diplômé",
     description: "Formation avancée en intelligence artificielle et développement mobile.",
