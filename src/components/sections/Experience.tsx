@@ -4,27 +4,57 @@ import { motion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 
 const Experience = () => {
-  const experiences = [
-    {
-      title: "Projet de test automatisé d'applications web (PFE)",
-      company: "INDATACORE",
-      location: "Casablanca",
-      period: "Février 2025 - Juillet 2025",
-      description: "Backend (Spring Boot + Spring Batch) :\n• Conception de jobs batch Spring Batch pour l'exécution planifiée et fiable de scénarios de test\n• Intégration de Selenium WebDriver pour la simulation automatisée des actions utilisateur\n• Mise en place d'un système de gestion d'erreurs robuste avec alertes e-mail\n• Utilisation de Docker pour l'exécution isolée des tests\n• Gestion des utilisateurs avec système de rôles\n\nFrontend (Angular) :\n• Interfaces pour la configuration des applications et workflows\n• Détection des erreurs frontend et déclenchement d'alertes",
-      technologies: ["Java", "Spring Boot", "Spring Batch", "Spring Security", "Selenium", "Docker", "Angular", "TypeScript", "RxJS"],
-      type: "internship"
-    },
-    {
-      title: "Application de gestion d'événements",
-      company: "R&D EVENT",
-      location: "Casablanca",
-      period: "Novembre 2024 - Janvier 2025",
-      description: "Conception et développement d'une application mobile de gestion d'événements :\n• Invitation des participants et gestion de la liste des invités\n• Accès aux informations essentielles de l'événement\n• Intégration avec Firebase pour l'authentification, base de données temps réel\n• Déploiement sur Google Play Store et Apple App Store",
-      technologies: ["Flutter", "Dart", "Firebase", "Cloud Storage", "Push Notifications"],
-      type: "contract"
-    }
-  ];
-
+const experiences = [
+  {
+    title: "Projet de test automatisé d'applications web (PFE)",
+    company: "INDATACORE",
+    location: "Casablanca",
+    period: "Février 2025 - Juillet 2025",
+    description:
+      "Développement d'un outil complet de tests automatisés pour applications web.\n\n" +
+      "🔹 Backend (Spring Boot + Spring Batch) :\n" +
+      "• Conception de jobs batch pour l’exécution planifiée des scénarios de test\n" +
+      "• Intégration de Selenium WebDriver pour la simulation d’actions utilisateur\n" +
+      "• Gestion centralisée des erreurs avec notifications par e-mail\n" +
+      "• Utilisation de Docker pour l’exécution isolée des environnements de test\n" +
+      "• Système de gestion des utilisateurs avec rôles via Spring Security\n\n" +
+      "🔹 Frontend (Angular) :\n" +
+      "• Interfaces ergonomiques pour la configuration des applications et workflows\n" +
+      "• Détection automatique des erreurs frontend avec déclenchement d’alertes",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring Batch",
+      "Spring Security",
+      "Selenium",
+      "Docker",
+      "Angular",
+      
+    ],
+    type: "internship"
+  },
+  {
+    title: "Application de gestion d'événements",
+    company: "R&D EVENT",
+    location: "Casablanca",
+    period: "Novembre 2024 - Janvier 2025",
+    description:
+      "Développement d’une application mobile multiplateforme pour la gestion d’événements.\n\n" +
+      "• Gestion des invités et invitations avec affichage des informations essentielles\n" +
+      "• Intégration de Firebase pour l’authentification et la base de données temps réel\n" +
+      "• Stockage d’images et documents via Firebase Cloud Storage\n" +
+      "• Envoi de notifications push pour informer les participants en temps réel\n" +
+      "• Déploiement de l’application sur Google Play Store et Apple App Store",
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Cloud Storage",
+      "Push Notifications"
+    ],
+    type: "contract"
+  }
+];
   const getTypeColor = (type: string) => {
     switch (type) {
       case "freelance":
