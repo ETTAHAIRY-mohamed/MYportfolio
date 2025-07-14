@@ -52,7 +52,7 @@ const experiences = [
       "Cloud Storage",
       "Push Notifications"
     ],
-    type: "contract"
+    type: "freelance"
   }
 ];
   const getTypeColor = (type: string) => {
