@@ -25,7 +25,6 @@ const Skills = () => {
       { name: "Spring Batch", icon: "📦", category: "backend" },
       { name: "Spring Security", icon: "🔐", category: "backend" },
       { name: "Angular", icon: "🅰️", category: "frontend" },
-      { name: "React", icon: "⚛️", category: "frontend" },
       { name: "Selenium", icon: "🧪", category: "testing" },
       { name: "Postman", icon: "📫", category: "testing" },
       { name: "Docker", icon: "🐳", category: "devops" }
