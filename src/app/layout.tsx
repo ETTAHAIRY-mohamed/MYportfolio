@@ -1,21 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+// Polices auto-hébergées (licence SIL OFL 1.1, voir ./fonts/LICENSE-*.txt) :
+// aucun téléchargement chez Google au build ni chez les visiteurs.
+// Cormorant Garamond : seuls les poids 400 et 500 (normal + italique) sont utilisés
+// sur le site. Pour un autre poids, ajoutez son fichier dans ./fonts et déclarez-le ici.
+const display = localFont({
+  src: [
+    { path: "./fonts/cormorant-garamond-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cormorant-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/cormorant-garamond-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/cormorant-garamond-latin-500-italic.woff2", weight: "500", style: "italic" },
+  ],
   variable: "--font-display",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
-const sans = Inter({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "./fonts/inter-latin-wght-normal.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-sans",
   display: "swap",
 });

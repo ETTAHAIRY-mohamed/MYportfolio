@@ -9,7 +9,7 @@ Site statique au design « luxe » (noir profond et or champagne, typographie se
 - **Next.js 15** (export statique) · **TypeScript** · **Tailwind CSS**
 - **Framer Motion** – animations (respecte « réduire les animations » du système)
 - **Lucide React** – icônes
-- **next/font** – polices auto-hébergées au build
+- **next/font/local** – polices auto-hébergées (Cormorant Garamond, Inter ; licence SIL OFL) dans `src/app/fonts/`, aucune requête vers Google
 
 ## Sections
 
