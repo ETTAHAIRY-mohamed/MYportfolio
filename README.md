@@ -1,192 +1,72 @@
-# Portfolio Ismail Alla - Développeur Mobile
+# Portfolio – Ettahairy Mohamed
 
-Un portfolio moderne et responsive développé avec Next.js, TypeScript et TailwindCSS pour présenter les compétences et réalisations d'Ismail Alla, développeur mobile expérimenté.
+Portfolio de **Ettahairy Mohamed**, développeur Full-Stack & Mobile (Flutter, Spring Boot, Angular), en Master 2 Systèmes Intelligents, Mobiles et Embarqués à l'Université de Rouen et à la recherche d'un stage de fin d'études (PFE).
 
-## 🚀 Technologies Utilisées
+Site statique au design « luxe » (noir profond et or champagne, typographie serif Cormorant Garamond + Inter), développé avec Next.js, TypeScript et Tailwind CSS, déployé sur GitHub Pages.
 
-- **Next.js 15** - Framework React pour le développement web
-- **TypeScript** - Typage statique pour JavaScript
-- **TailwindCSS** - Framework CSS utilitaire
-- **Framer Motion** - Bibliothèque d'animations
-- **Lucide React** - Icônes modernes
-- **Responsive Design** - Compatible mobile, tablette et desktop
+## Technologies
 
-## 📋 Fonctionnalités
+- **Next.js 15** (export statique) · **TypeScript** · **Tailwind CSS**
+- **Framer Motion** – animations (respecte « réduire les animations » du système)
+- **Lucide React** – icônes
+- **next/font** – polices auto-hébergées au build
 
-### 🏠 Sections du Portfolio
+## Sections
 
-1. **Accueil (Hero)** - Présentation personnelle avec appel à l'action
-2. **Compétences** - Technologies maîtrisées, langues et centres d'intérêt
-3. **Expérience** - Parcours professionnel avec timeline interactive
-4. **Éducation** - Formation académique et certifications
-5. **Projets** - Réalisations avec filtres par catégorie
-6. **Contact** - Formulaire de contact et informations
+1. **Accueil** – présentation, portrait, chiffres clés animés, bandeau de technologies
+2. **Expertise** – domaines, technologies par catégorie, langues, centres d'intérêt
+3. **Parcours** – timeline des expériences professionnelles
+4. **Projets** – réalisations filtrables (Full-Stack / Mobile)
+5. **Formation** – cursus et certifications
+6. **CV** – aperçu du CV, faits clés et téléchargement du PDF
+7. **Contact** – coordonnées et formulaire (ouvre le client mail avec le message pré-rempli)
 
-### ✨ Caractéristiques
+## Lancer en local
 
-- ✅ Design moderne et épuré
-- ✅ Animations fluides avec Framer Motion
-- ✅ Navigation responsive avec menu mobile
-- ✅ Mode sombre automatique
-- ✅ Optimisé pour les performances
-- ✅ SEO-friendly
-- ✅ Accessible (WCAG)
-- ✅ Formulaire de contact fonctionnel
-
-## 🛠️ Installation et Lancement
-
-### Prérequis
-
-- Node.js 18+
-- npm ou yarn
-
-### Installation
-
-1. **Cloner le projet** (si applicable)
-
-```bash
-git clone [url-du-repo]
-cd ismail-portfolio
-```
-
-2. **Installer les dépendances**
+Prérequis : Node.js 20+.
 
 ```bash
 npm install
-# ou
-yarn install
+npm run dev
 ```
 
-3. **Lancer en mode développement**
+Le site est servi sous `http://localhost:3000/MYportfolio` (le `basePath` correspond au nom du dépôt GitHub Pages).
 
 ```bash
-npm run dev
-# ou
-yarn dev
+npm run build   # génère le site statique dans ./out
 ```
 
-4. **Ouvrir dans le navigateur**
+## Où modifier le contenu
 
-```
-http://localhost:3000
-```
+**Tout le texte est centralisé dans [`src/data/content.ts`](src/data/content.ts)** : profil et coordonnées, statistiques, compétences, expériences, projets, formation, certifications.
 
-### Scripts Disponibles
+| Élément | Emplacement |
+| --- | --- |
+| Textes, expériences, projets, coordonnées | `src/data/content.ts` |
+| Titre et description SEO, polices | `src/app/layout.tsx` |
+| Couleurs (`ink`, `gold`, `ivory`), polices | `tailwind.config.ts` |
+| Styles globaux, boutons, cartes | `src/app/globals.css` |
+| Sections de la page | `src/components/sections/` |
+| CV téléchargeable | `public/cv.pdf` |
+| Aperçu du CV affiché dans la section CV | `public/cv-preview.jpg` |
+| Portrait | `public/portrait.jpg` |
 
-```bash
-# Développement
-npm run dev
+### Mettre à jour le CV
 
-# Build pour la production
-npm run build
+1. Remplacez `public/cv.pdf` par la nouvelle version.
+2. Régénérez l'aperçu `public/cv-preview.jpg` (image de la 1re page du PDF, ~1400 px de large) : il est affiché tel quel dans la section CV et n'est pas recalculé automatiquement.
 
-# Lancer la version de production
-npm run start
+### Ajouter un lien « Code » ou « Démo » à un projet
 
-# Linter
-npm run lint
-```
+Dans `src/data/content.ts`, renseignez `github` et/ou `demo` sur le projet : le bouton n'apparaît que si l'URL est présente.
 
-## 📁 Structure du Projet
+## Déploiement
 
-```
-├── src/
-│   ├── app/
-│   │   ├── globals.css          # Styles globaux
-│   │   ├── layout.tsx           # Layout principal
-│   │   └── page.tsx             # Page d'accueil
-│   └── components/
-│       ├── Navigation.tsx       # Barre de navigation
-│       ├── Footer.tsx           # Pied de page
-│       └── sections/            # Sections du portfolio
-│           ├── Hero.tsx         # Section héro
-│           ├── Skills.tsx       # Compétences
-│           ├── Experience.tsx   # Expérience
-│           ├── Education.tsx    # Formation
-│           ├── Projects.tsx     # Projets
-│           └── Contact.tsx      # Contact
-├── public/                      # Fichiers statiques
-├── next.config.js              # Configuration Next.js
-├── tailwind.config.ts          # Configuration TailwindCSS
-├── tsconfig.json               # Configuration TypeScript
-└── package.json                # Dépendances et scripts
-```
+Chaque push sur `main` déclenche le workflow `.github/workflows/deploy.yml`, qui construit le site et le publie sur GitHub Pages.
 
-## 🎨 Personnalisation
+## Contact
 
-### Couleurs et Thème
-
-Les couleurs principales peuvent être modifiées dans `tailwind.config.ts`:
-
-```typescript
-theme: {
-  extend: {
-    colors: {
-      primary: '#3B82F6',    // Bleu principal
-      secondary: '#10B981',  // Vert secondaire
-      // ...
-    }
-  }
-}
-```
-
-### Contenu
-
-Pour modifier le contenu du portfolio:
-
-1. **Informations personnelles** → `src/components/sections/Hero.tsx`
-2. **Compétences** → `src/components/sections/Skills.tsx`
-3. **Expérience** → `src/components/sections/Experience.tsx`
-4. **Formation** → `src/components/sections/Education.tsx`
-5. **Projets** → `src/components/sections/Projects.tsx`
-6. **Contact** → `src/components/sections/Contact.tsx`
-
-## 📱 Responsive Design
-
-Le portfolio est optimisé pour tous les écrans:
-
-- **Mobile** : < 768px
-- **Tablette** : 768px - 1024px
-- **Desktop** : > 1024px
-
-## 🌟 Optimisations
-
-- **Performance** : Lazy loading, optimisation des images
-- **SEO** : Meta tags, structure sémantique
-- **Accessibilité** : ARIA labels, navigation au clavier
-- **Core Web Vitals** : Optimisé pour les métriques Google
-
-## 🚀 Déploiement
-
-### Vercel (Recommandé)
-
-1. Créer un compte sur [Vercel](https://vercel.com)
-2. Connecter le repository GitHub
-3. Déployer automatiquement
-
-### Netlify
-
-1. Build du projet : `npm run build`
-2. Uploader le dossier `out/` sur Netlify
-
-### Serveur traditionnel
-
-1. Build : `npm run build`
-2. Démarrer : `npm run start`
-
-## 📞 Contact
-
-**Ismail Alla**
-
-- 📧 Email: alkaismail2001@gmail.com
-- 📱 Téléphone: +212 651 462 399
-- 🌍 LinkedIn: [linkedin.com/in/ismail-alla](https://www.linkedin.com/in/ismail-alla/)
-- 📍 Localisation: Rabat, Maroc
-
-## 📄 Licence
-
-Ce projet est créé pour le portfolio personnel d'Ismail Alla.
-
----
-
-Développé avec ❤️ par Ismail Alla
+- Email : ettahairy.mohamed.1@gmail.com
+- LinkedIn : [mohamed-ettahairy](https://www.linkedin.com/in/mohamed-ettahairy-173050336/)
+- GitHub : [ETTAHAIRY-mohamed](https://github.com/ETTAHAIRY-mohamed)
+- Localisation : Rouen, France

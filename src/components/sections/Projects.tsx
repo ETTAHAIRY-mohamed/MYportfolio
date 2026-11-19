@@ -1,298 +1,214 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github, Smartphone, Globe, Server } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, ExternalLink, Github, Layers, Smartphone } from "lucide-react";
+import {
+  profile,
+  projectCategoryLabel,
+  projectFilters,
+  projects,
+  type ProjectCategory,
+} from "@/data/content";
+import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import SpotlightCard from "@/components/ui/SpotlightCard";
+
+const categoryIcon = {
+  fullstack: Layers,
+  mobile: Smartphone,
+} as const;
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Application web de gestion de scolarité",
-      description: "Création d'une plateforme pour la gestion des étudiants, des cours et des emplois du temps.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Spring", "MySQL", "HTML/CSS", "JavaScript", "Bootstrap"],
-      category: "backend",
-      status: "Terminé",
-      features: [
-        "Gestion des étudiants",
-        "Gestion des cours",
-        "Emplois du temps",
-        "Interface responsive"
-      ],
-      github: "#",
-      demo: "#"
-    },
-    {
-      title: "Application web de gestion d'hôpital",
-      description: "Plateforme intégrée pour la gestion des patients, des rendez-vous et des dossiers médicaux.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Spring", "MongoDB", "Angular", "Bootstrap"],
-      category: "backend",
-      status: "Terminé",
-      features: [
-        "Gestion des patients",
-        "Gestion des rendez-vous",
-        "Dossiers médicaux",
-        "Interface moderne"
-      ],
-      github: "#",
-      demo: "#"
-    },
-    {
-      title: "Ebancing - Système Bancaire",
-      description: "Application bancaire offrant des fonctionnalités d'authentification sécurisée, gestion des comptes et traitement des transactions.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Spring Boot", "Spring Security", "PostgreSQL", "Angular", "RESTful APIs"],
-      category: "backend",
-      status: "Terminé",
-      features: [
-        "Authentification sécurisée",
-        "Gestion des comptes",
-        "Traitement des transactions",
-        "API RESTful"
-      ],
-      github: "#",
-      demo: "#"
-    },
-    {
-      title: "Système de Gestion des Stocks",
-      description: "Solution complète pour la gestion des stocks et des commandes avec interface Thymeleaf.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Spring Boot", "Hibernate", "MySQL", "Angular"],
-      category: "backend",
-      status: "Terminé",
-      features: [
-        "Gestion des stocks",
-        "Gestion des commandes",
-        "Interface utilisateur Thymeleaf",
-        "Base de données MySQL"
-      ],
-      github: "#",
-      demo: "#"
-    },
-    {
-      title: "Visualisation 3D Lunaire en AR",
-      description: "Application de réalité augmentée permettant de visualiser des modèles 3D de la Lune avec informations détaillées.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Flutter", "Blender", "ARCore/ARKit", "model_viewer_plus", "webview_flutter"],
-      category: "mobile",
-      status: "Terminé",
-      features: [
-        "Modèles 3D interactifs",
-        "Réalité augmentée",
-        "Informations détaillées",
-        "Visualisation en espace réel"
-      ],
-      github: "#",
-      demo: "#"
-    },
-    {
-      title: "Application de Voyage et Tourisme",
-      description: "Plateforme pour l'organisation de voyages et la découverte des meilleures destinations touristiques.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Spring Boot", "Angular", "PostgreSQL", "RESTful APIs", "Spring Security"],
-      category: "frontend",
-      status: "Terminé",
-      features: [
-        "Découverte de destinations",
-        "Organisation de voyages",
-        "Interface utilisateur fluide",
-        "Authentification sécurisée"
-      ],
-      github: "#",
-      demo: "#"
-    }
-  ];
+  const [filter, setFilter] = useState<"all" | ProjectCategory>("all");
 
-  const categories = [
-    { name: "Tous", value: "all", icon: Globe },
-    { name: "Mobile", value: "mobile", icon: Smartphone },
-    { name: "Backend", value: "backend", icon: Server },
-    { name: "Frontend", value: "frontend", icon: Globe },
-    { name: "IA/ML", value: "ai", icon: ExternalLink },
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Terminé":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "En cours":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-      case "En développement":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-      case "Planifié":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
-      case "Recherche":
-        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "mobile":
-        return "📱";
-      case "backend":
-        return "⚙️";
-      case "frontend":
-        return "🌐";
-      case "ai":
-        return "🤖";
-      default:
-        return "💻";
-    }
-  };
+  const visible =
+    filter === "all"
+      ? projects
+      : projects.filter((project) => project.category === filter);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Mes Projets
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Découvrez mes réalisations et projets en cours de développement
-          </p>
-        </motion.div>
+    <section id="projects" className="section">
+      <div className="container-x">
+        <SectionHeading
+          index="03"
+          eyebrow="Réalisations"
+          title={
+            <>
+              Projets <em className="text-gold-gradient">sélectionnés</em>
+            </>
+          }
+          description="Applications web full-stack et mobiles : de l'architecture backend à l'interface utilisateur."
+        />
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {categories.map((category, index) => (
-            <button
-              key={category.value}
-              className="flex items-center px-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
-            >
-              <category.icon className="h-4 w-4 mr-2" />
-              {category.name}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700"
-            >
-              {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-gray-700 dark:to-gray-600">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-6xl opacity-50">
-                    {getCategoryIcon(project.category)}
-                  </div>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                      project.status
-                    )}`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
-
-                {/* Features */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                    Fonctionnalités principales:
-                  </h4>
-                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    {project.features.slice(0, 3).map((feature, idx) => (
-                      <li key={idx} className="flex items-center">
-                        <span className="w-1 h-1 bg-blue-600 rounded-full mr-2"></span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex space-x-3">
-                  <a
-                    href={project.github}
-                    className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors"
-                  >
-                    <Github className="h-4 w-4 mr-1" />
-                    Code
-                  </a>
-                  <a
-                    href={project.demo}
-                    className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-1" />
-                    Demo
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700">
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              Intéressé par une collaboration ?
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              Je suis toujours ouvert à discuter de nouveaux projets et
-              opportunités. N'hésitez pas à me contacter pour en savoir plus sur
-              mes réalisations.
-            </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-            >
-              Discutons de votre projet
-            </a>
+        {/* Filtres */}
+        <Reveal>
+          <div
+            role="group"
+            aria-label="Filtrer les projets"
+            className="mb-12 flex flex-wrap gap-x-9 gap-y-3 border-b border-white/[0.08]"
+          >
+            {projectFilters.map((item) => {
+              const isActive = filter === item.value;
+              return (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => setFilter(item.value)}
+                  aria-pressed={isActive}
+                  className={`relative pb-4 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors duration-300 ${
+                    isActive
+                      ? "text-gold-300"
+                      : "text-ivory-400 hover:text-ivory-100"
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="project-filter"
+                      className="bg-gold-gradient absolute inset-x-0 -bottom-px h-px"
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
+        </Reveal>
+
+        {/* Grille */}
+        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {visible.map((project) => {
+              const number = String(projects.indexOf(project) + 1).padStart(2, "0");
+              const Icon = categoryIcon[project.category];
+
+              return (
+                <motion.article
+                  key={project.title}
+                  layout
+                  initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <SpotlightCard className="card group flex h-full flex-col overflow-hidden">
+                    {/* Visuel */}
+                    <div className="relative h-40 overflow-hidden border-b border-white/[0.07] bg-ink-800">
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage:
+                            "radial-gradient(circle at 85% 0%, rgba(214,182,111,0.22), transparent 55%), linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+                          backgroundSize: "auto, 32px 32px, 32px 32px",
+                        }}
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="absolute -bottom-3 left-6 font-display text-[7.5rem] font-medium italic leading-none text-outline-gold transition-transform duration-700 group-hover:-translate-y-2"
+                      >
+                        {number}
+                      </span>
+                      <span className="absolute right-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-ink-900/70 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-ivory-200 backdrop-blur">
+                        <Icon className="h-3.5 w-3.5 text-gold-400" aria-hidden="true" />
+                        {projectCategoryLabel[project.category]}
+                      </span>
+                    </div>
+
+                    {/* Contenu */}
+                    <div className="flex flex-1 flex-col p-7">
+                      <h3 className="font-display text-2xl font-medium leading-snug text-ivory-50">
+                        {project.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-ivory-300">
+                        {project.description}
+                      </p>
+
+                      <ul className="mt-5 space-y-2">
+                        {project.features.map((feature) => (
+                          <li
+                            key={feature}
+                            className="flex items-center gap-3 text-xs text-ivory-300"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="h-1 w-1 rotate-45 bg-gold-500"
+                            />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <ul className="mt-6 flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => (
+                          <li key={tech} className="chip !px-2.5 !py-0.5 !text-[11px]">
+                            {tech}
+                          </li>
+                        ))}
+                      </ul>
+
+                      {(project.github || project.demo) && (
+                        <div className="mt-6 flex gap-5 border-t border-white/[0.07] pt-5">
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-ivory-300 transition-colors hover:text-gold-300"
+                            >
+                              <Github className="h-4 w-4" aria-hidden="true" />
+                              Code
+                            </a>
+                          )}
+                          {project.demo && (
+                            <a
+                              href={project.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-ivory-300 transition-colors hover:text-gold-300"
+                            >
+                              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                              Démo
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </SpotlightCard>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Appel à l'action */}
+        <Reveal className="mt-20">
+          <div className="card flex flex-col items-center gap-6 px-6 py-12 text-center md:px-12">
+            <h3 className="font-display text-3xl text-ivory-50 md:text-4xl">
+              Un stage PFE ou un projet en tête&nbsp;?
+            </h3>
+            <p className="max-w-xl text-ivory-300">
+              Je recherche un stage de fin d&apos;études en développement
+              Full-Stack &amp; Mobile. Discutons-en, ou parcourez mon code sur
+              GitHub.
+            </p>
+            <div className="mt-2 flex flex-col gap-4 sm:flex-row">
+              <a href="#contact" className="btn btn-gold">
+                Me contacter
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                <Github className="h-4 w-4" aria-hidden="true" />
+                Voir mon GitHub
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

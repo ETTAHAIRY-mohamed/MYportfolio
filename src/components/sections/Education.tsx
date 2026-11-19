@@ -1,276 +1,114 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { GraduationCap, Award, Calendar, MapPin } from "lucide-react";
+import { Award, MapPin } from "lucide-react";
+import { certifications, education } from "@/data/content";
+import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const Education = () => {
-
-    const education = [
-  {
-    degree: "Master Systèmes Intelligents et Mobiles",
-    institution: "Université Sidi Mohammed Ben Abdellah",
-    location: "Taza, Maroc",
-    period: "2023 - 2025",
-    status: "Diplômé",
-    description: "Formation avancée en intelligence artificielle et développement mobile.",
-    type: "master"
-  },
-  {
-    degree: "Filière Sciences Mathématiques et Informatique",
-    institution: "Université Sultan Moulay Slimane",
-    location: "Khouribga, Maroc",
-    period: "2021 - 2023",
-    status: "Diplômé",
-    description: "Formation en mathématiques et informatique.",
-    type: "licence"
-  },
-  {
-    degree: "BAC Sciences Mathématiques A BIOF",
-    institution: "Lycée Ibn Yassine",
-    location: "Khouribga, Maroc",
-    period: "2020 ",
-    status: "Diplômé",
-    description: "Formation en mathématiques et sciences.",
-    type: "Bac"
-  }
-];
-  
-
-  const getEducationIcon = (type: string) => {
-    switch (type) {
-      case "master":
-        return "🎓";
-      case "licence":
-        return "🎓";
-      case "bts":
-        return "📚";
-      default:
-        return "🎓";
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    return status === "En cours"
-      ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-      : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-  };
-
   return (
-    <section id="education" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Formation & Éducation
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Mon parcours académique et mes certifications professionnelles
-          </p>
-        </motion.div>
+    <section id="education" className="section">
+      <div className="container-x">
+        <SectionHeading
+          index="04"
+          eyebrow="Formation"
+          title={
+            <>
+              Un cursus orienté{" "}
+              <em className="text-gold-gradient">systèmes intelligents</em>
+            </>
+          }
+          description="Du baccalauréat scientifique au Master 2 à l'Université de Rouen."
+        />
 
-        {/* Academic Education */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="flex items-center mb-8">
-            <GraduationCap className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-              Formation Académique
-            </h3>
-          </div>
+        <ol className="border-t border-white/[0.08]">
+          {education.map((item, index) => (
+            <li key={item.degree} className="border-b border-white/[0.08]">
+              <Reveal delay={index * 0.06}>
+                <div className="grid gap-4 py-9 transition-colors duration-500 hover:bg-white/[0.015] md:grid-cols-[170px_1.5fr_1fr_auto] md:items-center md:gap-10 md:px-4">
+                  <p className="font-display text-5xl italic leading-none text-gold-gradient md:text-6xl">
+                    {item.year}
+                  </p>
 
-          <div className="space-y-6">
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                  <div className="flex items-start">
-                    <div className="text-2xl mr-4 mt-1">
-                      {getEducationIcon(edu.type)}
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                        {edu.degree}
-                      </h4>
-                      <div className="text-blue-600 dark:text-blue-400 font-medium mb-2">
-                        {edu.institution}
-                      </div>
-                    </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-medium leading-snug text-ivory-50 md:text-3xl">
+                      {item.degree}
+                    </h3>
+                    <p className="mt-2 font-medium text-gold-300">
+                      {item.institution}
+                    </p>
                   </div>
+
+                  <div className="text-sm leading-relaxed text-ivory-300">
+                    <p>{item.description}</p>
+                    <p className="mt-3 flex items-start gap-2 text-ivory-400">
+                      <MapPin
+                        className="mt-1 h-3.5 w-3.5 shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span>
+                        {item.location} · {item.period}
+                      </span>
+                    </p>
+                  </div>
+
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
-                      edu.status
-                    )} mt-2 lg:mt-0 self-start lg:self-center`}
+                    className={`w-fit rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                      item.status === "En cours"
+                        ? "border border-gold-400 bg-gold-400/15 text-gold-200"
+                        : "border border-white/15 text-ivory-300"
+                    }`}
                   >
-                    {edu.status}
+                    {item.status}
                   </span>
                 </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
 
-                <div className="flex flex-col sm:flex-row sm:items-center text-sm text-gray-600 dark:text-gray-400 mb-3 space-y-1 sm:space-y-0 sm:space-x-4">
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    {edu.period}
-                  </div>
-                  <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    {edu.location}
-                  </div>
-                </div>
+        {/* Certifications */}
+        <div className="mt-24">
+          <Reveal>
+            <div className="mb-10 flex items-center gap-5">
+              <h3 className="flex items-center gap-3 font-display text-3xl text-ivory-50 md:text-4xl">
+                <Award className="h-6 w-6 text-gold-400" aria-hidden="true" />
+                Certifications
+              </h3>
+              <span className="h-px flex-1 bg-white/[0.08]" />
+            </div>
+          </Reveal>
 
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {edu.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Professional Courses */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center mb-8">
-            <Award className="h-8 w-8 text-green-600 dark:text-green-400 mr-3" />
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-              Certifications Professionnelles
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="text-2xl">🏆</div>
-                  {course.certificate && (
-                    <span className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 px-2 py-1 rounded-full text-xs font-medium">
+          <div className="grid gap-5 md:grid-cols-3">
+            {certifications.map((course, index) => (
+              <Reveal key={course.title} delay={index * 0.08}>
+                <SpotlightCard className="card h-full p-7">
+                  <div className="flex items-start justify-between">
+                    <p className="font-display text-xl italic text-gold-400">
+                      {course.date}
+                    </p>
+                    <span className="rounded-full border border-gold-500/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-200">
                       Certifié
                     </span>
-                  )}
-                </div>
-
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
-                  {course.title}
-                </h4>
-
-                <div className="text-blue-600 dark:text-blue-400 font-medium mb-2">
-                  {course.provider}
-                </div>
-
-                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {course.date}
-                </div>
-
-                <div className="flex flex-wrap gap-1">
-                  {course.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                  </div>
+                  <h4 className="mt-6 font-display text-2xl font-medium leading-snug text-ivory-50">
+                    {course.title}
+                  </h4>
+                  <p className="mt-1 text-sm text-ivory-300">{course.provider}</p>
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {course.skills.map((skill) => (
+                      <li key={skill} className="chip !px-2.5 !py-0.5 !text-[11px]">
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </SpotlightCard>
+              </Reveal>
             ))}
           </div>
-        </motion.div>
-
-        {/* Education Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-8"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                3
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Diplômes obtenus
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                3
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Certifications
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                5+
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Années d'études
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">
-                Diplômé
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 text-sm">
-                Formation Master
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
-
-const courses = [
-    {
-        title: "Introduction to C",
-        provider: "Sololearn",
-        date: "2020",
-        certificate: true,
-        skills: ["C Programming", "Algorithms", "Data Structures"]
-    },
-    {
-        title: "Effective Business Websites",
-        provider: "HP LIFE | HP",
-        date: "2021",
-        certificate: true,
-        skills: ["Web Design", "Business Strategy", "UX/UI"]
-    },
-    {
-        title: "Foundation Composer",
-        provider: "SymfonyCasts",
-        date: "2023",
-        certificate: true,
-        skills: ["PHP", "Composer", "Package Management", "Symfony"]
-    }
-];
 
 export default Education;
