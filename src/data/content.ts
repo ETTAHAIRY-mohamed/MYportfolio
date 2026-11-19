@@ -173,7 +173,7 @@ export const domains: Domain[] = [
 export const languages = [
   { name: "Arabe", level: "Langue maternelle", percentage: 100 },
   { name: "Français", level: "Courant", percentage: 90 },
-  { name: "Anglais", level: "Intermédiaire", percentage: 55 },
+  { name: "Anglais", level: "Courant", percentage: 90 },
 ] as const;
 
 export const interests = [
