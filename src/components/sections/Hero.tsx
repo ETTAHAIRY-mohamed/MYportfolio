@@ -171,9 +171,9 @@ const Hero = () => {
               <img
                 src={asset(profile.portrait)}
                 alt={`Portrait de ${profile.fullName}`}
-                width={600}
-                height={600}
-                className="h-full w-full object-cover object-[50%_18%]"
+                width={1000}
+                height={1250}
+                className="h-full w-full object-cover object-top"
                 fetchPriority="high"
               />
               <div
